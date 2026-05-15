@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dilip | Web Developer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg:#08090c;
+      --surface:#111318;
+      --border:#1e2128;
+      --accent:#7c6af7;
+      --accent2:#f7a26a;
+      --text:#ecedf2;
+      --muted:#6b6f7e;
+      --card:#13151c;
+    }
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font-size:16px;line-height:1.7;overflow-x:hidden}
+
+    /* NAV */
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.1rem 6%;background:rgba(8,9,12,0.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+    .logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.3rem;color:var(--accent);letter-spacing:0.04em}
+    .nav-links{display:flex;gap:2rem;list-style:none}
+    .nav-links a{color:var(--muted);text-decoration:none;font-size:0.88rem;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;transition:color 0.2s}
+    .nav-links a:hover{color:var(--text)}
+
+    /* HERO */
+    #hero{min-height:100vh;display:flex;align-items:center;padding:8rem 6% 5rem;position:relative;overflow:hidden}
+    #hero::before{content:'';position:absolute;top:-200px;right:-100px;width:600px;height:600px;background:radial-gradient(circle,rgba(124,106,247,0.12) 0%,transparent 70%);pointer-events:none}
+    #hero::after{content:'';position:absolute;bottom:-150px;left:-50px;width:400px;height:400px;background:radial-gradient(circle,rgba(247,162,106,0.07) 0%,transparent 70%);pointer-events:none}
+    .hero-inner{display:flex;align-items:center;gap:4rem;max-width:1100px;margin:0 auto;width:100%}
+    .hero-text{flex:1}
+    .hero-tag{display:inline-block;background:rgba(124,106,247,0.1);border:1px solid rgba(124,106,247,0.25);color:var(--accent);font-size:0.78rem;letter-spacing:0.14em;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:1.5rem}
+    .hero-name{font-family:'Syne',sans-serif;font-size:clamp(2.8rem,6vw,5rem);font-weight:800;line-height:1.05;letter-spacing:-0.02em;margin-bottom:0.5rem}
+    .hero-name span{color:var(--accent)}
+    .hero-role{font-size:1.15rem;color:var(--muted);margin-bottom:1.5rem;font-weight:300}
+    .hero-role b{color:var(--accent2);font-weight:500}
+    .hero-desc{color:var(--muted);max-width:480px;margin-bottom:2.5rem;font-size:0.97rem}
+    .btn-group{display:flex;gap:1rem;flex-wrap:wrap}
+    .btn-primary{background:var(--accent);color:#fff;padding:12px 28px;border-radius:10px;text-decoration:none;font-weight:500;font-size:0.9rem;transition:opacity 0.2s,transform 0.15s}
+    .btn-primary:hover{opacity:0.85;transform:translateY(-1px)}
+    .btn-outline{border:1px solid var(--border);color:var(--text);padding:12px 28px;border-radius:10px;text-decoration:none;font-weight:500;font-size:0.9rem;transition:border-color 0.2s,transform 0.15s}
+    .btn-outline:hover{border-color:var(--accent);transform:translateY(-1px)}
+    .hero-photo{flex-shrink:0}
+    .photo-ring{width:280px;height:280px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));padding:3px;position:relative}
+    .photo-inner{width:100%;height:100%;border-radius:50%;background:var(--surface);display:flex;align-items:center;justify-content:center;overflow:hidden;font-size:7rem}
+    .hero-stats{display:flex;gap:2.5rem;margin-top:2.5rem}
+    .stat-n{font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;color:var(--text)}
+    .stat-n span{color:var(--accent)}
+    .stat-l{font-size:0.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em}
+
+    /* SECTIONS */
+    section{padding:6rem 6%}
+    .sec-inner{max-width:1100px;margin:0 auto}
+    .sec-tag{font-size:0.75rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.16em;font-weight:500;margin-bottom:0.6rem}
+    .sec-title{font-family:'Syne',sans-serif;font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:800;margin-bottom:1rem;letter-spacing:-0.02em}
+    .sec-line{width:48px;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:2px;margin-bottom:2.5rem}
+
+    /* ABOUT */
+    #about{background:var(--surface)}
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:start}
+    .about-text p{color:var(--muted);margin-bottom:1rem;font-size:0.97rem}
+    .about-text p strong{color:var(--text)}
+    .edu-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.25rem 1.5rem;margin-bottom:1rem;position:relative;overflow:hidden}
+    .edu-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--accent),var(--accent2))}
+    .edu-degree{font-weight:500;font-size:0.97rem;margin-bottom:2px}
+    .edu-school{font-size:0.83rem;color:var(--muted)}
+    .edu-year{font-size:0.75rem;color:var(--accent);margin-top:4px}
+
+    /* SKILLS */
+    .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem}
+    .skill-cat{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.5rem}
+    .skill-cat-title{font-weight:500;font-size:0.9rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1.2rem}
+    .skill-item{margin-bottom:1rem}
+    .skill-row{display:flex;justify-content:space-between;font-size:0.87rem;margin-bottom:5px}
+    .skill-pct{color:var(--accent);font-weight:500}
+    .skill-bar-bg{height:5px;background:var(--border);border-radius:3px;overflow:hidden}
+    .skill-bar{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width 1s ease}
+
+    /* PROJECTS */
+    #projects{background:var(--surface)}
+    .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:1.5rem}
+    .proj-card{background:var(--card);border:1px solid var(--border);border-radius:18px;overflow:hidden;transition:transform 0.2s,border-color 0.2s}
+    .proj-card:hover{transform:translateY(-4px);border-color:rgba(124,106,247,0.35)}
+    .proj-thumb{height:160px;display:flex;align-items:center;justify-content:center;font-size:3.5rem;background:linear-gradient(135deg,rgba(124,106,247,0.1),rgba(247,162,106,0.06))}
+    .proj-body{padding:1.25rem 1.4rem 1.5rem}
+    .proj-title{font-family:'Syne',sans-serif;font-weight:700;font-size:1.05rem;margin-bottom:0.4rem}
+    .proj-desc{font-size:0.85rem;color:var(--muted);margin-bottom:1rem;line-height:1.6}
+    .proj-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1rem}
+    .tag{font-size:0.72rem;padding:3px 10px;border-radius:20px;background:rgba(124,106,247,0.1);border:1px solid rgba(124,106,247,0.2);color:var(--accent)}
+    .proj-links{display:flex;gap:10px}
+    .proj-link{font-size:0.8rem;color:var(--muted);text-decoration:none;border:1px solid var(--border);padding:5px 14px;border-radius:8px;transition:color 0.2s,border-color 0.2s}
+    .proj-link:hover{color:var(--text);border-color:var(--accent)}
+
+    /* EXPERIENCE */
+    .exp-timeline{position:relative;padding-left:2rem}
+    .exp-timeline::before{content:'';position:absolute;left:0;top:8px;bottom:8px;width:1px;background:var(--border)}
+    .exp-item{position:relative;margin-bottom:2rem}
+    .exp-dot{position:absolute;left:-2.45rem;top:6px;width:12px;height:12px;border-radius:50%;background:var(--accent);border:2px solid var(--bg);box-shadow:0 0 0 3px rgba(124,106,247,0.2)}
+    .exp-period{font-size:0.75rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:3px}
+    .exp-title{font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;margin-bottom:2px}
+    .exp-company{font-size:0.85rem;color:var(--muted);margin-bottom:0.5rem}
+    .exp-desc{font-size:0.87rem;color:var(--muted);line-height:1.65}
+
+    /* CONTACT */
+    #contact{background:var(--surface)}
+    .contact-wrap{display:grid;grid-template-columns:1fr 1.4fr;gap:3rem;align-items:start}
+    .contact-info p{color:var(--muted);font-size:0.95rem;margin-bottom:1.5rem}
+    .contact-item{display:flex;align-items:center;gap:12px;margin-bottom:1rem;font-size:0.9rem}
+    .contact-icon{width:40px;height:40px;border-radius:10px;background:rgba(124,106,247,0.1);border:1px solid rgba(124,106,247,0.2);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+    .contact-label{font-size:0.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em}
+    .contact-val{font-size:0.9rem}
+    .form-group{margin-bottom:1.1rem}
+    .form-group label{display:block;font-size:0.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px}
+    .form-group input,.form-group textarea{width:100%;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:11px 14px;color:var(--text);font-family:'Outfit',sans-serif;font-size:0.92rem;outline:none;transition:border-color 0.2s;resize:none}
+    .form-group input:focus,.form-group textarea:focus{border-color:var(--accent)}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+    .btn-submit{width:100%;background:var(--accent);color:#fff;border:none;border-radius:10px;padding:13px;font-family:'Outfit',sans-serif;font-weight:500;font-size:0.95rem;cursor:pointer;transition:opacity 0.2s}
+    .btn-submit:hover{opacity:0.85}
+
+    /* FOOTER */
+    footer{border-top:1px solid var(--border);padding:2rem 6%;text-align:center;color:var(--muted);font-size:0.82rem}
+    footer span{color:var(--accent)}
+
+    @media(max-width:768px){
+      .hero-inner{flex-direction:column-reverse;text-align:center;gap:2rem}
+      .hero-desc{margin:0 auto 2rem}
+      .btn-group{justify-content:center}
+      .hero-stats{justify-content:center}
+      .about-grid,.contact-wrap{grid-template-columns:1fr}
+      .photo-ring{width:200px;height:200px}
+      .form-row{grid-template-columns:1fr}
+      nav .nav-links{display:none}
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">D.K</div>
+  <ul class="nav-links">
+    <li><a href="#hero">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-tag">👋 Available for Internships</div>
+      <h1 class="hero-name">Hi, I'm <span>Dilip</span><br>Kumar</h1>
+      <p class="hero-role">Web Developer &amp; <b>IoT Enthusiast</b></p>
+      <p class="hero-desc">A passionate Computer Science student building clean, functional web applications and exploring the intersection of embedded systems and the web.</p>
+      <div class="btn-group">
+        <a href="#projects" class="btn-primary">View Projects</a>
+        <a href="#contact" class="btn-outline">Hire Me</a>
+      </div>
+      <div class="hero-stats">
+        <div><div class="stat-n">5<span>+</span></div><div class="stat-l">Projects</div></div>
+        <div><div class="stat-n">3<span>+</span></div><div class="stat-l">Internship Tasks</div></div>
+        <div><div class="stat-n">2<span>+</span></div><div class="stat-l">Years Coding</div></div>
+      </div>
+    </div>
+    <div class="hero-photo">
+      <div class="photo-ring">
+        <div class="photo-inner">👨‍💻</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="sec-inner">
+    <div class="sec-tag">Who I Am</div>
+    <h2 class="sec-title">About Me</h2>
+    <div class="sec-line"></div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I'm <strong>Dilip Kumar</strong>, a Computer Science undergraduate based in <strong>Chennai, Tamil Nadu</strong>. I love building things for the web and have a strong interest in Embedded Systems and IoT.</p>
+        <p>Currently doing my internship tasks focused on web development — from interactive games to full-stack weather applications. I write clean, readable code and care about user experience.</p>
+        <p>When I'm not coding, I'm exploring new technologies, working on IoT projects, or preparing for my semester exams (CS3691 ✌️).</p>
+        <br/>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap">
+          <div style="font-size:0.85rem;color:var(--muted)">📍 Chennai, India</div>
+          <div style="font-size:0.85rem;color:var(--muted)">🎓 B.E. Computer Science</div>
+          <div style="font-size:0.85rem;color:var(--muted)">💬 Tamil &amp; English</div>
+        </div>
+      </div>
+      <div>
+        <div class="sec-tag" style="margin-bottom:1rem">Education</div>
+        <div class="edu-card">
+          <div class="edu-degree">B.E. Computer Science &amp; Engineering</div>
+          <div class="edu-school">University — Chennai, Tamil Nadu</div>
+          <div class="edu-year">2022 – 2026 (ongoing)</div>
+        </div>
+        <div class="edu-card">
+          <div class="edu-degree">Higher Secondary (12th) — Computer Science</div>
+          <div class="edu-school">Tamil Nadu State Board</div>
+          <div class="edu-year">Completed 2022</div>
+        </div>
+        <div class="edu-card">
+          <div class="edu-degree">SSLC (10th)</div>
+          <div class="edu-school">Tamil Nadu State Board</div>
+          <div class="edu-year">Completed 2020</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="sec-inner">
+    <div class="sec-tag">What I Know</div>
+    <h2 class="sec-title">Skills</h2>
+    <div class="sec-line"></div>
+    <div class="skills-grid">
+      <div class="skill-cat">
+        <div class="skill-cat-title">Frontend</div>
+        <div class="skill-item"><div class="skill-row"><span>HTML5</span><span class="skill-pct">90%</span></div><div class="skill-bar-bg"><div class="skill-bar" style="width:90%"></div></div></div>
+        <div class="skill-item"><div class="skill-row"><span>CSS3</span><span class="skill-pct">85%</span></div><div class="skill-bar-bg"><div class="skill-bar" style="width:85%"></div></div></div>
+        <div class="skill-item"><div class="skill-row"><span>JavaScript</span><span class="skill-pct">80%</span></div><div class="skill-bar-bg"><div class="skill-bar" style="width:80%"></div></div></div>
+        <div class="skill-item"><div class="skill-row"><span>React (basics)</span><span class="skill-pct">60%</span></div><div class="skill-bar-bg"><div class="skill-bar" style="width:60%"></div></div></div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-title">Embedded &amp; IoT</div>
+        <div class="skill-item"><div class="skill-row"><span>Arduino / C</span><span class="skill-pct">80%</span></div><div class="skill-bar-bg"><div class="skill-bar" style="width:80%"></div></div></div>
+        <div class="skill-item"><div class="skill-row"><span>8051 Assembly</span><span class="skill-pct">75%</span></div><div class="skill-bar-bg"><div class="skill-bar" style="width:75%"></div></div></div>
+        <div class="skill-item"><div class="skill-row"><span>Raspberry Pi (Python)</span><span class="skill-pct">70%</span></div><div class="skill-bar-bg"><div class="skill-bar" style="width:70%"></div></div></div>
+        <div class="skill-item"><div class="skill-row"><span>MQTT / LoRaWAN</span><span class="skill-pct">65%</span></div><div class="skill-bar-bg"><div class="skill-bar" style="width:65%"></div></div></div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-title">Tools &amp; Others</div>
+        <div class="skill-item"><div class="skill-row"><span>Git &amp; GitHub</span><span class="skill-pct">82%</span></div><div class="skill-bar-bg"><div class="skill-bar" style="width:82%"></div></div></div>
+        <div class="skill-item"><div class="skill-row"><span>Python</span><span class="skill-pct">75%</span></div><div class="skill-bar-bg"><div class="skill-bar" style="width:75%"></div></div></div>
+        <div class="skill-item"><div class="skill-row"><span>VS Code</span><span class="skill-pct">90%</span></div><div class="skill-bar-bg"><div class="skill-bar" style="width:90%"></div></div></div>
+        <div class="skill-item"><div class="skill-row"><span>REST APIs</span><span class="skill-pct">78%</span></div><div class="skill-bar-bg"><div class="skill-bar" style="width:78%"></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="sec-inner">
+    <div class="sec-tag">What I've Built</div>
+    <h2 class="sec-title">Projects</h2>
+    <div class="sec-line"></div>
+    <div class="projects-grid">
+      <div class="proj-card">
+        <div class="proj-thumb">⏱️</div>
+        <div class="proj-body">
+          <div class="proj-title">Stopwatch Web App</div>
+          <div class="proj-desc">A responsive stopwatch with start, stop, reset and lap tracking functionality. Clean UI with precise millisecond timing.</div>
+          <div class="proj-tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+          <div class="proj-links"><a href="#" class="proj-link">GitHub</a><a href="#" class="proj-link">Live Demo</a></div>
+        </div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-thumb">❌⭕</div>
+        <div class="proj-body">
+          <div class="proj-title">Tic-Tac-Toe + AI</div>
+          <div class="proj-desc">Interactive Tic-Tac-Toe with an unbeatable AI opponent powered by the Minimax algorithm. Includes 2-player mode and score tracking.</div>
+          <div class="proj-tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">Minimax AI</span></div>
+          <div class="proj-links"><a href="#" class="proj-link">GitHub</a><a href="#" class="proj-link">Live Demo</a></div>
+        </div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-thumb">🌤️</div>
+        <div class="proj-body">
+          <div class="proj-title">Weather App</div>
+          <div class="proj-desc">Real-time weather app using OpenWeatherMap API. Supports city search and GPS-based location with temperature, humidity, wind and more.</div>
+          <div class="proj-tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">REST API</span></div>
+          <div class="proj-links"><a href="#" class="proj-link">GitHub</a><a href="#" class="proj-link">Live Demo</a></div>
+        </div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-thumb">🤖</div>
+        <div class="proj-body">
+          <div class="proj-title">IoT Smart Monitor</div>
+          <div class="proj-desc">Raspberry Pi-based IoT system that monitors sensor data and sends it to a dashboard via MQTT protocol.</div>
+          <div class="proj-tags"><span class="tag">Python</span><span class="tag">MQTT</span><span class="tag">Raspberry Pi</span></div>
+          <div class="proj-links"><a href="#" class="proj-link">GitHub</a></div>
+        </div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-thumb">💼</div>
+        <div class="proj-body">
+          <div class="proj-title">Portfolio Website</div>
+          <div class="proj-desc">This very portfolio — built with pure HTML, CSS and JS. Fully responsive, dark-themed with smooth scroll navigation.</div>
+          <div class="proj-tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+          <div class="proj-links"><a href="#" class="proj-link">GitHub</a><a href="#" class="proj-link">Live</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="sec-inner">
+    <div class="sec-tag">My Journey</div>
+    <h2 class="sec-title">Experience</h2>
+    <div class="sec-line"></div>
+    <div class="exp-timeline">
+      <div class="exp-item">
+        <div class="exp-dot"></div>
+        <div class="exp-period">2025 – Present</div>
+        <div class="exp-title">Web Development Intern</div>
+        <div class="exp-company">Prodigy InfoTech (Remote)</div>
+        <div class="exp-desc">Building real-world web applications as internship tasks — including interactive games (Tic-Tac-Toe with Minimax AI), weather apps with REST API integration, a stopwatch, and a personal portfolio.</div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-dot"></div>
+        <div class="exp-period">2024</div>
+        <div class="exp-title">Embedded Systems & IoT Coursework</div>
+        <div class="exp-company">B.E. CSE — CS3691</div>
+        <div class="exp-desc">Studied 8051 microcontroller architecture, RTOS concepts, IoT protocols (MQTT, CoAP, LoRaWAN, BLE) and built projects using Arduino and Raspberry Pi.</div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-dot"></div>
+        <div class="exp-period">2022 – 2024</div>
+        <div class="exp-title">Self-taught Web Developer</div>
+        <div class="exp-company">Personal Projects</div>
+        <div class="exp-desc">Learned HTML, CSS, JavaScript through online resources and personal projects. Built multiple small apps to sharpen frontend skills.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="sec-inner">
+    <div class="sec-tag">Get In Touch</div>
+    <h2 class="sec-title">Contact Me</h2>
+    <div class="sec-line"></div>
+    <div class="contact-wrap">
+      <div class="contact-info">
+        <p>I'm currently open to internship opportunities and freelance projects. Feel free to reach out!</p>
+        <div class="contact-item">
+          <div class="contact-icon">📧</div>
+          <div><div class="contact-label">Email</div><div class="contact-val">dilip@example.com</div></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div><div class="contact-label">Location</div><div class="contact-val">Chennai, Tamil Nadu, India</div></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">💼</div>
+          <div><div class="contact-label">GitHub</div><div class="contact-val">github.com/dilipkumar</div></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🔗</div>
+          <div><div class="contact-label">LinkedIn</div><div class="contact-val">linkedin.com/in/dilipkumar</div></div>
+        </div>
+      </div>
+      <div>
+        <div class="form-row">
+          <div class="form-group"><label>Name</label><input type="text" placeholder="Your Name"/></div>
+          <div class="form-group"><label>Email</label><input type="email" placeholder="you@email.com"/></div>
+        </div>
+        <div class="form-group"><label>Subject</label><input type="text" placeholder="Internship / Project Collaboration…"/></div>
+        <div class="form-group"><label>Message</label><textarea rows="5" placeholder="Hi Dilip, I'd like to…"></textarea></div>
+        <button class="btn-submit" onclick="this.textContent='Message Sent ✅';setTimeout(()=>this.textContent='Send Message',2500)">Send Message</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Designed &amp; Built by <span>Dilip Kumar</span> · 2025 · Chennai, India</p>
+</footer>
+
+</body>
+</html>
